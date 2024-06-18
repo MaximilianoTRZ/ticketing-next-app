@@ -5,6 +5,7 @@ const Dashboard = () => {
     <div>
       <TicketCard />
       <div>Hello</div>
+      <div>Hello</div>
     </div>
   );
 };
