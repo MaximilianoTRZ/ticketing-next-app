@@ -25,14 +25,13 @@ const TicketForm = () => {
       "content-type": "application/json",
     });
 
-    console.log("post done", res);
-
     if (!res.ok) {
       throw new Error("Failed to create Ticket.");
     }
 
     router.refresh();
     router.push("/");
+    router.refresh();
   };
 
   //initial form
