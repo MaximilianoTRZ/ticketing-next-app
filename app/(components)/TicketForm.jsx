@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const TicketForm = ({ ticket }) => {
-  const EDITMODE = ticket.id === "new" ? false : true;
+  const EDITMODE = ticket._id === "new" ? false : true;
   const router = useRouter();
 
   const handleChange = (e) => {
@@ -20,14 +20,26 @@ const TicketForm = ({ ticket }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const res = await fetch("/api/Tickets", {
-      method: "POST",
-      body: JSON.stringify({ formData }),
-      "content-type": "application/json",
-    });
+    if (EDITMODE) {
+      const res = await fetch(`/api/Tickets/${ticket._id}`, {
+        method: "PUT",
+        body: JSON.stringify({ formData }),
+        "content-type": "application/json",
+      });
 
-    if (!res.ok) {
-      throw new Error("Failed to create Ticket.");
+      if (!res.ok) {
+        throw new Error("Failed to update Ticket.");
+      }
+    } else {
+      const res = await fetch("/api/Tickets", {
+        method: "POST",
+        body: JSON.stringify({ formData }),
+        "content-type": "application/json",
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to create Ticket.");
+      }
     }
 
     router.refresh();
@@ -65,6 +77,7 @@ const TicketForm = ({ ticket }) => {
         method="post"
         onSubmit={handleSubmit}
       >
+        {/* conditional rendering depending the case if its update or create */}
         <h3>{EDITMODE ? "Update your  ticket" : "Create your ticket"}</h3>
 
         <label>Title</label>
