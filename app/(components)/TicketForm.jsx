@@ -54,7 +54,7 @@ const TicketForm = ({ ticket }) => {
     priority: 1,
     progress: 0,
     status: "not started",
-    category: "Hardware Problem",
+    category: "Frontend Issue",
   };
 
   if (EDITMODE) {
@@ -106,9 +106,9 @@ const TicketForm = ({ ticket }) => {
           value={formData.category}
           onChange={handleChange}
         >
-          <option value="Hardware Problem">Hardware Problem</option>
-          <option value="Software Problem">Software Problem</option>
-          <option value="Project">Project</option>
+          <option value="Frontend Issue">Frontend Issue</option>
+          <option value="Backend Issue">Backend Issue</option>
+          <option value="Project Backlog">Project Backlog</option>
         </select>
 
         <label>Priority</label>
