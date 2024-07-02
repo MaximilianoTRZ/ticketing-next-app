@@ -5,7 +5,7 @@ const getTicketById = async (id) => {
   const options = {
     cache: "no-store",
   };
-  const res = await fetch(`http://localhost:3000/api/Tickets/${id}`, options);
+  const res = await fetch(`/api/Tickets/${id}`, options);
 
   if (!res.ok) {
     throw new Error("Failed to get ticket.");
